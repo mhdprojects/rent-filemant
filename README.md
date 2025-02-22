@@ -1,66 +1,54 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Rent App Using Filament
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Car rental web application using PHP with Laravel and Filament.
 
-## About Laravel
+## Tech Stack
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [![Laravel](https://img.shields.io/badge/Laravel_11.9.2-FF2D20?&logo=laravel&labelColor=white "Laravel")](https://laravel.com)
+- [![Filament](https://img.shields.io/badge/Filament_3.2.124-F2911B?&logo=data:image/png;base64,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&labelColor=white "Filament")](https://filamentphp.com)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirement
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [![PHP](https://img.shields.io/badge/PHP_8.2-777BB4?&logo=php&logoColor=white "PHP")](https://php.net)
+- [![Composer](https://img.shields.io/badge/Composer_2.7.1-885630?&logo=composer&logoColor=white "Composer")](https://getcomposer.org)
+- [![PostgreSQL](https://img.shields.io/badge/PostgreSQL_16.0-316192?&logo=postgresql&logoColor=white "PostgreSQL")](https://www.postgresql.org)
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Installation
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+To get started using this app, simply paste this command into your terminal:
+```bash
+git clone https://github.com/mhdprojects/rent-filemant.git
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Database Configuration
 
-## Laravel Sponsors
+- Create a database.
+- Update the `.env` file in the Laravel project with your database credentials.
+- Run migration using this command below:
+```bash
+php artisan migrate
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Run Application
 
-### Premium Partners
+To run this application:
+```bash
+php artisan serve
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Demo Aplication
+![login page](public/img/demo1.png)
+![login page](public/img/demo2.png)
+![login page](public/img/demo3.png)
+![login page](public/img/demo4.png)
+![login page](public/img/demo5.png)
+![login page](public/img/demo6.png)
 
-## Contributing
+## Author
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Mahmud Afrianto (https://afrimhd.my.id)
