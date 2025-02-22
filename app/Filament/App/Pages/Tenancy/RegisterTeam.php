@@ -19,7 +19,7 @@ class RegisterTeam extends RegisterTenant{
             return $form
                   ->schema([
                       TextInput::make('name')
-                          ->label('Nama Perusahaan Anda')
+                          ->label('Company Name')
                           ->required()
                           ->maxLength(255)
                           ->live(onBlur: true)
