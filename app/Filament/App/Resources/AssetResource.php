@@ -34,6 +34,8 @@ class AssetResource extends Resource
 
     protected static ?string $tenantOwnershipRelationshipName = 'tenant';
 
+    protected static ?string $label = 'Car';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -80,18 +82,18 @@ class AssetResource extends Resource
 
                         Split::make([
                             Forms\Components\TextInput::make('warna')
-                                ->label('Warna')
+                                ->label('Color')
                                 ->placeholder('Hitam')
                                 ->maxLength(30),
 
                             Forms\Components\TextInput::make('tahun')
-                                ->label('Tahun')
+                                ->label('Year')
                                 ->placeholder('2022')
                                 ->required()
                                 ->maxLength(4),
 
                             Forms\Components\TextInput::make('stock')
-                                ->label('Jml. tersedia')
+                                ->label('Qty Available')
                                 ->placeholder('1')
                                 ->default(1)
                                 ->numeric(),
@@ -126,27 +128,27 @@ class AssetResource extends Resource
                             ->visibility('public'),
 
                         Textarea::make('description')
-                            ->label('Catatan'),
+                            ->label('Note'),
 
                         Toggle::make('is_active')
                             ->default(true)
-                            ->label('Asset Aktif'),
+                            ->label('Active'),
                     ]),
 
-                Forms\Components\Section::make('Variant Harga')
+                Forms\Components\Section::make('Price Variant')
                     ->schema([
                         Forms\Components\Repeater::make("variants")
                             ->relationship()
                             ->schema([
                                 Forms\Components\TextInput::make('name')
-                                    ->label('Nama Variant')
+                                    ->label('Name')
                                     ->required()
                                     ->columnSpan([
                                         'md' => 4,
                                     ])
                                     ->maxLength(50),
                                 Forms\Components\TextInput::make('duration')
-                                    ->label('Durasi')
+                                    ->label('Duration')
                                     ->minValue(1)
                                     ->numeric()
                                     ->required()
@@ -154,19 +156,19 @@ class AssetResource extends Resource
                                         'md' => 2,
                                     ]),
                                 Forms\Components\Select::make('period_in')
-                                    ->label('Periode')
+                                    ->label('Period')
                                     ->options([
                                         Constant::PERIOD_MINUTE => Constant::PERIOD_MINUTE,
                                         Constant::PERIOD_HOUR => Constant::PERIOD_HOUR,
                                         Constant::PERIOD_DAY => Constant::PERIOD_DAY,
                                     ])
-                                    ->placeholder('Pilih')
+                                    ->placeholder('Choose')
                                     ->columnSpan([
                                         'md' => 3,
                                     ])
                                     ->native(false),
                                 Forms\Components\TextInput::make('price')
-                                    ->label('Harga')
+                                    ->label('Price')
                                     ->numeric()
                                     ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 0)
                                     ->required()
@@ -206,11 +208,11 @@ class AssetResource extends Resource
                     ->label('Status')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('warna')
-                    ->label('Warna')
+                    ->label('Color')
                     ->toggleable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tahun')
-                    ->label('Tahun')
+                    ->label('Year')
                     ->toggleable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('updated_at')

@@ -30,13 +30,13 @@ class PaymentsRelationManager extends RelationManager
                                 ->readOnly(),
 
                             Forms\Components\DatePicker::make('tgl')
-                                ->label('Tanggal')
+                                ->label('Date Payment')
                                 ->default(now())
                                 ->required(),
                         ])->from('sm'),
 
                         Forms\Components\Select::make('payment_method_id')
-                            ->label('Metode Pembayaran')
+                            ->label('Payment Method')
                             ->relationship(
                                 name: 'paymentMethod',
                                 titleAttribute: 'name',
@@ -46,14 +46,14 @@ class PaymentsRelationManager extends RelationManager
                             ->required(),
 
                         Forms\Components\TextInput::make('nominal')
-                            ->label('Jumlah Dibayar')
+                            ->label('Amount')
                             ->dehydrated()
                             ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 0)
                             ->numeric()
                             ->required(),
 
                         Textarea::make('description')
-                            ->label('Catatan'),
+                            ->label('Notes'),
                     ]),
             ]);
     }

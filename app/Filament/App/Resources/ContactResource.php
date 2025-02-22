@@ -39,12 +39,12 @@ class ContactResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->label('Nama lengkap')
+                            ->label('Fullname')
                             ->required()
                             ->maxLength(100),
 
                         PhoneInput::make('phone')
-                            ->label('No, Whatsapp')
+                            ->label('No. Whatsapp')
                             ->required()
                             ->onlyCountries(['id'])
                             ->defaultCountry('id')
@@ -52,20 +52,20 @@ class ContactResource extends Resource
                             ->inputNumberFormat(PhoneInputNumberType::E164),
 
                         Forms\Components\TextInput::make('email')
-                            ->label('Alamat Email')
+                            ->label('Email Address')
                             ->maxLength(200),
 
                         Forms\Components\Split::make([
                             Toggle::make('is_customer')
                                 ->default(true)
-                                ->label('Sebagai Customer'),
+                                ->label('As a Customer'),
                             Toggle::make('is_partner')
                                 ->default(true)
-                                ->label('Sebagai  Partner'),
+                                ->label('As a Partner'),
                         ]),
 
                         Textarea::make('alamat')
-                            ->label('Alamat'),
+                            ->label('Address'),
 
                         FileUpload::make('image')
                             ->label('Foto Contact')
@@ -80,7 +80,7 @@ class ContactResource extends Resource
                             ->visibility('public'),
 
                         Textarea::make('description')
-                            ->label('Catatan'),
+                            ->label('Notes'),
                     ])
                     ->columnSpan(['lg' => fn (?Contact $record) => $record === null ? 3 : 2]),
                 Forms\Components\Section::make()

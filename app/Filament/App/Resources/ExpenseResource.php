@@ -60,7 +60,7 @@ class ExpenseResource extends Resource
                                 ->readOnly(),
 
                             Forms\Components\DatePicker::make('tgl')
-                                ->label('Tanggal')
+                                ->label('Date')
                                 ->default(now())
                                 ->required(),
                         ])->from('sm'),
@@ -112,7 +112,7 @@ class ExpenseResource extends Resource
                                 ->required(),
 
                             Forms\Components\Select::make('payment_method_id')
-                                ->label('Metode Pembayaran')
+                                ->label('Payment Method')
                                 ->relationship(
                                     name: 'paymentMethod',
                                     titleAttribute: 'name',
@@ -123,6 +123,7 @@ class ExpenseResource extends Resource
                         ])->from('sm'),
 
                         Forms\Components\TextInput::make('nominal')
+                            ->label('Amount')
                             ->numeric()
                             ->default(0)
                             ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 0)
@@ -150,7 +151,7 @@ class ExpenseResource extends Resource
                             ->visibility('public'),
 
                         Textarea::make('description')
-                            ->label('Catatan'),
+                            ->label('Notes'),
                     ]),
 
             ]);
@@ -165,6 +166,7 @@ class ExpenseResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tgl')
+                    ->label('Date')
                     ->date()
                     ->toggleable()
                     ->searchable()
@@ -174,7 +176,7 @@ class ExpenseResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('PaymentMethod.name')
-                    ->label('Metode')
+                    ->label('Payment Method')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nominal')
@@ -216,7 +218,7 @@ class ExpenseResource extends Resource
             ])
             ->groups([
                 Tables\Grouping\Group::make('tgl')
-                    ->label('Tanggal')
+                    ->label('Date')
                     ->collapsible(),
             ])
             ->actions([

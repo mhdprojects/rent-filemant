@@ -62,7 +62,7 @@ class OrderResource extends Resource
                     ->schema([
                         Forms\Components\TextInput::make('number')
                             ->label('Number')
-                            ->placeholder('No. Transaksi Otomatis')
+                            ->placeholder('No. Trx')
                             ->columnSpan(1)
                             ->readOnly(),
 
@@ -75,12 +75,12 @@ class OrderResource extends Resource
                             )
                             ->createOptionForm([
                                 Forms\Components\TextInput::make('name')
-                                    ->label('Nama lengkap')
+                                    ->label('Full Name')
                                     ->required()
                                     ->maxLength(100),
 
                                 PhoneInput::make('phone')
-                                    ->label('No, Whatsapp')
+                                    ->label('No. Whatsapp')
                                     ->required()
                                     ->onlyCountries(['id'])
                                     ->defaultCountry('id')
@@ -88,20 +88,20 @@ class OrderResource extends Resource
                                     ->inputNumberFormat(PhoneInputNumberType::E164),
 
                                 Forms\Components\TextInput::make('email')
-                                    ->label('Alamat Email')
+                                    ->label('Email Address')
                                     ->maxLength(200),
 
                                 Forms\Components\Split::make([
                                     Toggle::make('is_customer')
                                         ->default(true)
-                                        ->label('Sebagai Customer'),
+                                        ->label('As a Customer'),
                                     Toggle::make('is_partner')
                                         ->default(true)
-                                        ->label('Sebagai  Partner'),
+                                        ->label('As a Partner'),
                                 ]),
 
                                 Textarea::make('alamat')
-                                    ->label('Alamat'),
+                                    ->label('Address'),
 
                                 FileUpload::make('image')
                                     ->label('Foto Contact')
@@ -125,14 +125,14 @@ class OrderResource extends Resource
                             ->required(),
 
                         Forms\Components\DatePicker::make('tgl')
-                            ->label('Tanggal Sewa')
+                            ->label('Date Rent')
                             ->default(now())
                             ->readOnly(fn (?Order $record) => $record !== null)
                             ->reactive()
                             ->required(),
 
                         Forms\Components\TimePicker::make('jam')
-                            ->label('Jam Sewa')
+                            ->label('Hour Rent')
                             ->seconds(false)
                             ->datalist(Constant::TIME_SELECT)
                             ->reactive()
@@ -150,7 +150,7 @@ class OrderResource extends Resource
                             ->required(),
                     ])->columns(),
 
-                Forms\Components\Section::make('Detail Pesanan')
+                Forms\Components\Section::make('Detail Order')
                     ->schema([
                         Forms\Components\Repeater::make("items")
                             ->relationship()
@@ -169,7 +169,7 @@ class OrderResource extends Resource
                 Forms\Components\Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('subtotal')
-                            ->label('Total Pembayaran')
+                            ->label('Total Payment')
                             ->disabled()
                             ->dehydrated()
                             ->placeholder(function (Forms\Get $get, Forms\Set $set) {
@@ -189,7 +189,7 @@ class OrderResource extends Resource
                                 'md' => 3,
                             ]),
                         Forms\Components\TextInput::make('paid')
-                            ->label('Terbayar')
+                            ->label('Paid')
                             ->disabled()
                             ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 0)
                             ->numeric()
@@ -199,7 +199,7 @@ class OrderResource extends Resource
                                 'md' => 3,
                             ]),
                         Forms\Components\TextInput::make('kurang')
-                            ->label('Sisa Pembayaran')
+                            ->label('Unpaid')
                             ->disabled()
                             ->currencyMask(thousandSeparator: ',', decimalSeparator: '.', precision: 0)
                             ->numeric()
@@ -209,7 +209,7 @@ class OrderResource extends Resource
                                 'md' => 3,
                             ]),
                         Textarea::make('description')
-                            ->label('Catatan'),
+                            ->label('Note'),
                     ])
                     ->columns(1),
             ])->columns(1);
@@ -314,7 +314,7 @@ class OrderResource extends Resource
                 ]),
 
             Forms\Components\DatePicker::make('start_date')
-                ->label('Tanggal Mulai Sewa')
+                ->label('Date Start Rent')
                 ->default(now())
                 ->hidden(fn (?OrderItem $record) => $record === null)
                 ->readOnly(fn (?OrderItem $record) => $record !== null)
@@ -324,7 +324,7 @@ class OrderResource extends Resource
                 ->required(),
 
             Forms\Components\TimePicker::make('start_time')
-                ->label('Jam Mulai Sewa')
+                ->label('Hour Start Sewa')
                 ->seconds(false)
                 ->datalist(Constant::TIME_SELECT)
                 ->displayFormat('H:i:s')
@@ -337,7 +337,7 @@ class OrderResource extends Resource
                 ->required(),
 
             Forms\Components\DatePicker::make('end_date')
-                ->label('Tanggal Selesai Sewa')
+                ->label('Date end rent')
                 ->readOnly()
                 ->hidden(fn (?OrderItem $record) => $record === null)
                 ->readOnly(fn (?OrderItem $record) => $record !== null)
@@ -345,7 +345,7 @@ class OrderResource extends Resource
                     'md' => 3,
                 ]),
             Forms\Components\TimePicker::make('end_time')
-                ->label('Tanggal Selesai Sewa')
+                ->label('Hour end rent')
                 ->readOnly()
                 ->seconds(false)
                 ->displayFormat('H:i:s')
@@ -356,7 +356,7 @@ class OrderResource extends Resource
                     'md' => 3,
                 ]),
             Toggle::make('sudah_kembali')
-                ->label('Asset Sudah Dikembalikan')
+                ->label('Has been returned')
                 ->hidden(fn (?OrderItem $record) => $record === null || $record->status === OrderStatus::Partial || $record->status === OrderStatus::Processing)
                 ->columnSpan([
                     'md' => 6,
@@ -384,7 +384,7 @@ class OrderResource extends Resource
                     ->toggleable()
                     ->badge(),
                 Tables\Columns\TextColumn::make('payment_status')
-                    ->label('Pembayaran')
+                    ->label('Payment')
                     ->toggleable()
                     ->badge(),
                 Tables\Columns\TextColumn::make('subtotal')
@@ -392,7 +392,7 @@ class OrderResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('paid')
-                    ->label('Bayar')
+                    ->label('Paid')
                     ->currency()
                     ->searchable()
                     ->sortable(),
@@ -435,7 +435,7 @@ class OrderResource extends Resource
             ])
             ->groups([
                 Tables\Grouping\Group::make('tgl')
-                    ->label('Tanggal')
+                    ->label('Date')
                     ->collapsible(),
             ])
             ->actions([
